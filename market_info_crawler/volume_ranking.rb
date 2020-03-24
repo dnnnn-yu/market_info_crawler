@@ -23,6 +23,15 @@ def parse_ranking_table(html, column)
   stock_datas
 end
 
+def calcurate_diff(stock_data, market)
+  stock_ratio = stock_data[:ratio].gsub(/%/,"").to_f
+  index_ratio = Index.find_by(date: TODAY, market: market).ratio.gsub(/%/,"").to_f
+  answer = (stock_ratio - index_ratio).round(2)
+  relative_ratio = sprintf("%10.2f", answer).gsub(" ","")
+  relative_ratio = "+" + relative_ratio if answer > 0
+  relative_ratio
+end
+
 MARKETS.each do |market, i|
   (1..$page_number).each do |p|
     sleep(10)
@@ -37,6 +46,7 @@ MARKETS.each do |market, i|
           rank: stock_data[:rank],
           price: stock_data[:price],
           ratio: stock_data[:ratio],
+          relative_ratio:  calcurate_diff(stock_data, market) + "%",
           volume: stock_data[:volume],
           date: TODAY
         )
