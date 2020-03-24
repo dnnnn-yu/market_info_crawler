@@ -14,6 +14,7 @@ def parse_ranking_table(html, column)
     stock_datas << {
       name: stock_data.css('td')[column[:name]].text.gsub(/\(株\)/,''),
       code: stock_data.css('td')[column[:code]].text.to_i,
+      rank: stock_data.css('td')[column[:rank]].text.to_i,
       price: stock_data.css('td')[column[:price]].text.gsub(/,/,'').to_i,
       ratio: stock_data.css('td')[column[:ratio]].text,
       volume: stock_data.css('td')[column[:volume]].text.gsub(/,/,'').to_i
@@ -33,6 +34,7 @@ MARKETS.each do |market, i|
           market: market,
           code: stock_data[:code],
           name: stock_data[:name],
+          rank: stock_data[:rank],
           price: stock_data[:price],
           ratio: stock_data[:ratio],
           volume: stock_data[:volume],

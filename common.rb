@@ -48,6 +48,7 @@ $page_number = 3
 $column_positions = {
   code: 1,
   name: 3,
+  rank: 0,
   price: 5,
   ratio: 6,
   volume: 8
