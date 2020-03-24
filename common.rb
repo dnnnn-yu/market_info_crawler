@@ -32,6 +32,9 @@ end
 class Index < ActiveRecord::Base
 end
 
+class Pickup < ActiveRecord::Base
+end
+
 TODAY = Date.today
 
 #URL生成用(Yahoo!ファイナンス)
