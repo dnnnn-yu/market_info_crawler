@@ -31,6 +31,15 @@ def stock_booming?(stock_data, market, border)
   end
 end
 
+def calcurate_diff(stock_data, market)
+  stock_ratio = stock_data[:ratio].gsub(/%/,"").to_f
+  index_ratio = Index.find_by(date: TODAY, market: market).ratio.gsub(/%/,"").to_f
+  answer = (stock_ratio - index_ratio).round(2)
+  relative_ratio = sprintf("%10.2f", answer).gsub(" ","")
+  relative_ratio = "+" + relative_ratio if answer > 0
+  relative_ratio
+end
+
 MARKETS.each do |market, i|
   (1..$page_number).each do |p|
     sleep(10)
@@ -45,6 +54,7 @@ MARKETS.each do |market, i|
           price: stock_data[:price],
           ratio: stock_data[:ratio],
           volume: stock_data[:volume],
+          relative_ratio:  calcurate_diff(stock_data, market) + "%",
           date: TODAY
         )
        end
