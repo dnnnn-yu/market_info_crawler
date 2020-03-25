@@ -34,19 +34,17 @@ end
 
 def create_record(stock_datas, market, border)
   stock_datas.each do |stock_data|
-    if stock_booming?(stock_data, market, border)
-     Volume.create(
-       market: market,
-       code: stock_data[:code],
-       name: stock_data[:name],
-       price: stock_data[:price],
-       ratio: stock_data[:ratio],
-       volume: stock_data[:volume],
-       relative_ratio:  calcurate_diff(stock_data, market) + "%",
-       date: TODAY
-     )
-    end
- end
+    Volume.create(
+      market: market,
+      code: stock_data[:code],
+      name: stock_data[:name],
+      price: stock_data[:price],
+      ratio: stock_data[:ratio],
+      volume: stock_data[:volume],
+      relative_ratio:  calcurate_diff(stock_data, market) + "%",
+      date: TODAY
+    )
+  end
 end
 
 MARKETS.each do |market, i|
