@@ -8,7 +8,7 @@ ActiveRecord::Base.establish_connection(
   adapter:  "mysql2",
   host:     "localhost",
   username: "root",
-  password: "",
+  password: "password",
   database: "market_info",
   charset: 'utf8mb4',
   encoding: 'utf8mb4',
