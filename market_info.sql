@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.29)
 # Database: market_info
-# Generation Time: 2020-03-24 07:48:25 +0000
+# Generation Time: 2020-03-25 02:23:38 +0000
 # ************************************************************
 
 
@@ -33,6 +33,7 @@ CREATE TABLE `decreases` (
   `volume` int(255) DEFAULT NULL,
   `ratio` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `relative_ratio` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -50,6 +51,7 @@ CREATE TABLE `increases` (
   `volume` int(255) DEFAULT NULL,
   `ratio` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `relative_ratio` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -71,17 +73,33 @@ CREATE TABLE `indices` (
 
 
 
+# Dump of table pickups
+# ------------------------------------------------------------
+
+CREATE TABLE `pickups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `market` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `code` int(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
 # Dump of table volumes
 # ------------------------------------------------------------
 
 CREATE TABLE `volumes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `market` varchar(255) DEFAULT NULL,
+  `rank` int(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `code` int(255) DEFAULT NULL,
   `price` int(255) DEFAULT NULL,
   `volume` bigint(255) DEFAULT NULL,
   `ratio` varchar(255) DEFAULT NULL,
+  `relative_ratio` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

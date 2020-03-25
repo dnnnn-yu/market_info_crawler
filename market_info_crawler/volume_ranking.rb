@@ -32,24 +32,29 @@ def calcurate_diff(stock_data, market)
   relative_ratio
 end
 
+def create_record(stock_datas, market, border)
+  stock_datas.each do |stock_data|
+    if stock_booming?(stock_data, market, border)
+     Decrease.create(
+       market: market,
+       code: stock_data[:code],
+       name: stock_data[:name],
+       price: stock_data[:price],
+       ratio: stock_data[:ratio],
+       volume: stock_data[:volume],
+       relative_ratio:  calcurate_diff(stock_data, market) + "%",
+       date: TODAY
+     )
+    end
+ end
+end
+
 MARKETS.each do |market, i|
   (1..$page_number).each do |p|
     sleep(10)
-    p target_url(i, p)
+    puts "現在のアクセス先" + target_url(i, p)
     html = open(target_url(i, p)).read 
     stock_datas = parse_ranking_table(html, $column_positions)
-    stock_datas.each do |stock_data|
-        Volume.create(
-          market: market,
-          code: stock_data[:code],
-          name: stock_data[:name],
-          rank: stock_data[:rank],
-          price: stock_data[:price],
-          ratio: stock_data[:ratio],
-          relative_ratio:  calcurate_diff(stock_data, market) + "%",
-          volume: stock_data[:volume],
-          date: TODAY
-        )
-    end
+    create_record(stock_datas, market, $money_volume_border)
   end
 end
