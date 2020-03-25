@@ -38,6 +38,7 @@ def create_record(stock_datas, market, border)
       market: market,
       code: stock_data[:code],
       name: stock_data[:name],
+      rank: stock_data[:rank],
       price: stock_data[:price],
       ratio: stock_data[:ratio],
       volume: stock_data[:volume],
