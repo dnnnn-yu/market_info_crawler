@@ -35,7 +35,7 @@ end
 def create_record(stock_datas, market, border)
   stock_datas.each do |stock_data|
     if stock_booming?(stock_data, market, border)
-     Decrease.create(
+     Volume.create(
        market: market,
        code: stock_data[:code],
        name: stock_data[:name],
