@@ -14,7 +14,7 @@ ActiveRecord::Base.establish_connection(
   encoding: 'utf8mb4',
   collation: 'utf8mb4_general_ci'
 )
-# ActiveRecord::Base.logger = Logger.new(STDERR)
+ActiveRecord::Base.logger = Logger.new(STDERR)
 
 # DBのタイムゾーン設定
 Time.zone_default = Time.find_zone! 'Tokyo'

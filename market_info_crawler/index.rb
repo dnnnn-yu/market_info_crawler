@@ -17,6 +17,7 @@ end
 
 markets.each do |market, i|
   sleep(10)
+  puts "現在のアクセス先" + target_url(i)
   html = open(target_url(i)).read
   doc = Nokogiri::HTML.parse(html)
   Index.create(
